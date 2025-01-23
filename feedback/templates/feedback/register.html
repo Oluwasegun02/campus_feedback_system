@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+{% load static %}
+{% block content %}
+<div class="max-w-md mx-auto mt-16 bg-white p-6 rounded-lg shadow-lg border border-[rgb(132,22,31)]">
+    <!-- Logo Section -->
+    <div class="text-center mb-6">
+        <img src="{% static 'images/download.jpeg' %}" alt="School Logo" class="w-24 h-24 mx-auto">
+        <h1 class="text-2xl font-bold text-[rgb(132,22,31)] mt-4">Feedback System</h1>
+    </div>
+
+    <!-- Register Form -->
+    <div class="max-w-md mx-auto bg-white p-6 rounded shadow-md mt-8">
+        <h2 class="text-2xl font-semibold text-center mb-4 text-[rgb(132,22,31)]">SignUp</h2>
+    
+        <form method="post" class="mt-4 space-y-4">
+            {% csrf_token %}
+            {% for field in form %}
+            <div>
+                <label class="block text-lg font-medium text-88131c mb-2" for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="text-red-600 text-sm mt-1">
+                        {{ field.errors|striptags }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+            <button type="submit" class="bg-88131c text-white py-2 px-4 rounded bg-red-700">
+                SignUp
+            </button>
+        </form>
+    </div>
+
+    <!-- Login Link -->
+    <div class="text-center mt-4">
+        <p class="text-sm text-gray-600">Already have an account?</p>
+        <a href="{% url 'login' %}" class="text-[rgb(132,22,31)] font-semibold hover:underline">SignIn Here</a>
+    </div>
+</div>
+{% endblock %}
+

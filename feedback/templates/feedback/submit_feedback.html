@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Submit Feedback{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded shadow-md">
+    <h2 class="text-2xl font-semibold text-88131c mb-4">Submit Feedback</h2>
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit"
+            class="bg-88131c text-white py-2 px-4 rounded bg-red-700 focus:ring focus:ring-88131c">
+            Submit
+        </button>
+    </form>
+</div>
+{% endblock %}

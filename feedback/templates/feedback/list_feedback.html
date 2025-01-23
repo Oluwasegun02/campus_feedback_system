@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Feedback List{% endblock %}
+{% block content %}
+<h2 class="text-2xl font-semibold mb-4">All Feedback</h2>
+<form method="get" class="mb-4">
+    <label for="category" class="block text-lg">Filter by Category:</label>
+    <select name="category" id="category" onchange="this.form.submit()" class="mt-2 p-2 border border-88131c rounded">
+        <option value="">All</option>
+        {% for category in categories %}
+            <option value="{{ category.id }}" {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>
+                {{ category.name }}
+            </option>
+        {% endfor %}
+    </select>
+</form>
+<ul class="space-y-4">
+    {% for feedback in feedbacks %}
+        <li class="p-4 border border-gray-300 rounded shadow hover:shadow-lg">
+            <a href="{% url 'view_feedback' feedback.id %}" class="text-xl font-bold text-88131c hover:underline">{{ feedback.title }}</a>
+            <p class="text-gray-700">{{ feedback.description|truncatewords:20 }}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Feedback Details{% endblock %}
+{% block content %}
+<h2 class="text-2xl font-semibold text-88131c">{{ feedback.title }}</h2>
+<p class="text-lg mt-4">{{ feedback.description }}</p>
+<p class="mt-2 text-gray-700">Rating: {{ feedback.rating }}/5</p>
+<p class="mt-2 text-gray-700">Category: {{ feedback.category.name }}</p>
+<h3 class="text-xl font-semibold mt-6">Comments</h3>
+<ul class="space-y-2 mt-4">
+    {% for comment in comments %}
+        <li class="p-2 border border-gray-300 rounded">
+            <strong>{{ comment.user.username }}</strong>: {{ comment.comment }}
+        </li>
+    {% endfor %}
+</ul>
+<h3 class="text-xl font-semibold mt-6">Add a Comment</h3>
+<form method="post" class="mt-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="bg-88131c text-white py-2 px-4 rounded bg-red-700">
+        Post Comment
+    </button>
+</form>
+{% endblock %}

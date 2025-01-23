@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Campus Feedback System{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        main {
+            flex: 1;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+    <header class="bg-[#88131c] text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Campus Feedback System</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="{% url 'list_feedback' %}" class="hover:underline">All Feedback</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'submit_feedback' %}" class="hover:underline">Submit Feedback</a></li>
+                        <li><a href="{% url 'feedback_analytics' %}" class="hover:underline">Analytics</a></li>
+                        <li><a href="{% url 'logout' %}" class="hover:underline">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}" class="hover:underline">SignIn</a></li>
+                        <li><a href="{% url 'register' %}" class="hover:underline">SignUp</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container mx-auto mt-8">
+        {% block content %}{% endblock %}
+        
+    </main>
+    <footer class="bg-[#88131c] text-white text-center py-4 mt-8">
+        &copy; 2025 Campus Feedback System by SegzyDEV
+    </footer>
+    
+    
+</body>
+</html>
